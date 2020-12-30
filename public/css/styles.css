@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root {
+	--primary:#f15d30;
+}
+
+body {
+	background-color: #FFF;
+	font-family: 'Poppins', sans-serif;
+	font-size: 14px;
+}
+
+section.hero {
+	padding-top:70px;
+	height: 100vh;
+	width: 100%;
+	background-size: cover;
+	background-position: center;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0,0,0,.4)
+}
+
+.hero-item {
+	z-index: 1;
+	position: relative;
+	color:#FFF;
+}
+
+.hero-title {
+    font-size:3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #FFF;
+    font-style: italic;
+    background-color: var(--primary);
+    display: inline-block;
+    padding: 8px;
+}
+
+.hero-tagline {
+	font-size: 14px;
+}
+
+nav.main-nav {
+	background-color: transparent;
+	transition: background-color 0.2s linear;
+}
+
+nav.main-nav.bg {
+	background-color: #FFF;
+	border-bottom: 4px solid var(--primary);
+}
+
+nav.main-nav.bg button.navbar-toggler {
+	border:0;
+	color:#000!important;
+}
+
+nav.main-nav.bg a.navbar-brand {
+	color: var(--primary);
+}
+
+nav.main-nav.bg a.navbar-brand:hover {
+	color: #000;
+}
+
+nav.main-nav.bg li.nav-item a.nav-link {
+	color: var(--primary)!important;
+}
+
+nav.main-nav a.navbar-brand {
+	text-transform: uppercase;
+	color: #FFF;
+	font-size: 26px;
+	font-weight: 700;
+}
+
+nav.main-nav a.navbar-brand:hover {
+	color: var(--primary);
+}
+
+nav.main-nav li.nav-item a.nav-link, .btn-nav-daftar {
+	color: #FFF!important;
+	font-size: 15px;
+	font-weight: 400;
+	margin:10px!important;
+}
+
+nav.main-nav li.nav-item a.nav-link {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+nav.main-nav li.nav-item.active a.nav-link, nav.main-nav li.nav-item a.nav-link:hover {
+	color:var(--primary)!important;
+	border-bottom: 4px solid var(--primary);
+}
+
+button.navbar-toggler {
+	border:0;
+	color:#FFF!important;
+}
+
+.navbar-collapse.collapsing, 
+.navbar-collapse.collapse.show {
+	background-color: #FFF;
+}
+
+.navbar-collapse.collapsing li.nav-item a.nav-link, 
+.navbar-collapse.collapse.show li.nav-item a.nav-link {
+	color: #000!important;
+}
+
+section.upcoming-section {
+	padding: 80px 0px;
+}
+
+section.upcoming-section .upcoming-section-title {
+	display: inline-block;
+	border-bottom: 4px solid var(--primary);
+	color:var(--primary);
+	padding: 10px 0px;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+section.upcoming-section .title-container {
+	width: 100%;
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+section.upcoming-section .upcoming-title {
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 24px;
+}
+
+section.request-event-section {
+	position: relative;
+	padding: 80px 0px;
+	background-size: cover;
+	background-position: center;
+	background-image: url('../images/request-bg.jpg');
+}
+
+section.request-event-section .request-event-container {
+	position: relative;
+	z-index: 1;
+}
+section.request-event-section .request-event-title {
+	color:#FFF;
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+section.ayo-jelajah-section {
+	padding: 80px 0px;
+}
+
+section.ayo-jelajah-section .ayo-jelajah-title {
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+section.contact-us-section {
+	position: relative;
+	padding: 80px 0px;
+	background-size: cover;
+	background-position: center;
+	background-image: url('../images/contact-us.jpg');
+}
+
+section.contact-us-section .contact-us-container {
+	position: relative;
+	z-index: 1;
+}
+section.contact-us-section .contact-us-content {
+	color:#FFF;
+}
+section.contact-us-section .contact-us-title {
+	color:#FFF;
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+footer {
+	padding: 40px 0px;
+}
+
+footer b {
+	color: var(--primary)
+}
+
+#scroll_to_top {
+	display: none;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	padding: 10px 15px;
+}
+
+.float-shopping-cart {
+	display: block;
+	position: fixed;
+	bottom: 75px;
+	right: 30px;
+	z-index: 99;
+	padding: 10px 15px;
+}
+
+.float-cart-badge {
+	position: absolute!important;
+	top: 5px!important;
+	right: 5px!important;
+}
+
+#scroll_to_top:hover {
+	background-color: #555;
+}
+
+
+
+.product-card .card-img {
+	margin-top: 15px;
+	margin-bottom: 10px;
+	height: 100px;
+    object-fit: cover;
+}
+
+.product-description {
+	height: 150px;
+	overflow:hidden;
+}
+
+.tingkat-sekolah.container {
+	padding: 80px 0px;
+	position: relative;
+}
+
+section.tingkat-sekolah .title-container {
+	width: 100%;
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+.jenjang-card {
+	color:#FFF;
+	margin-bottom: 10px;
+}
+.jenjang-card .card-title {
+	font-weight: 700!important;
+	color:var(--primary);
+}
+.jenjang-card .card-img {
+	margin-top: 15px;
+	margin-bottom: 10px;
+	height: 100px;
+    object-fit: cover;
+}
+
+.jenjang-description {
+	height: 150px;
+	overflow:hidden;
+}
+
+@media screen and (max-width: 600px) {
+	.hero-title {
+		font-size: 28px;
+	}
+}
