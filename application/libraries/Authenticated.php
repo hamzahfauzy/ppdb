@@ -11,13 +11,13 @@ class Authenticated
 
 	public function auth_check()
 	{
-		if($this->CI->session->userdata('user_id'))
+		if($this->CI->session->userdata('id'))
 			redirect('admin');
 	}
 
 	public function check()
 	{
-		if(!$this->CI->session->userdata('user_id'))
+		if(!$this->CI->session->userdata('id'))
 			redirect('auth/login');
 	}
 }

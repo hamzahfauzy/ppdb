@@ -34,9 +34,15 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
-
+    <?php
+    if($this->session->flashdata('login_error')) {
+      $message = $this->session->flashdata('login_error');
+    ?>
+      <div class="alert alert-danger"><?php echo $message; ?></div>
+    <?php
+      }
+    ?>
     <form action="<?=base_url('auth/login')?>" method="post">
-      <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Username" name="username">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -54,7 +60,7 @@
     </form>
     <!-- /.social-auth-links -->
     <center>
-    Pendaftaran Siswa Baru <a href="register.html" class="text-center">Klik Disini</a>
+    Pendaftaran Siswa Baru <a href="<?=base_url('daftar')?>" class="text-center">Klik Disini</a>
     </center>
 
   </div>

@@ -6,6 +6,7 @@ class Auth extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->model('User');
 	}
 
 	public function login()
@@ -15,11 +16,18 @@ class Auth extends CI_Controller {
 		if(isset($request['action']) && $request['action']=='login')
 		{
 			// do login here
-			unset($request['action']);
-			$request['user_id'] = 1;
-			$request['level'] = 'Admin';
-			$this->session->set_userdata($request);
-			redirect('admin');
+			$user = $this->User->login($request['username'],md5($request['password']));
+			if($user->num_rows())
+			{
+				$user = $user->result_array();
+				$this->session->set_userdata($user[0]);
+				redirect('admin');
+			}
+			else
+			{
+				$this->session->set_flashdata('login_error', "Login Gagal! Username atau Password Salah");
+				redirect('auth/login');
+			}
 			return;
 		}
 		$this->load->view('auth/login');

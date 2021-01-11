@@ -34,7 +34,7 @@ $site = site();
 					<a class="nav-link" href="javascript:void(0)">Cek Pengumuman</a>
 				</li>
 				<li class="nav-item">
-					<a class="btn btn-primary btn-nav-daftar" href="<?=base_url('auth/login')?>">Daftar / Login</a>
+					<a class="btn btn-primary btn-nav-daftar" href="<?=base_url('daftar')?>">Mendaftar</a>
 				</li>
 			</ul>
 		</div>

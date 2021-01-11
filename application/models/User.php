@@ -4,6 +4,20 @@ class User extends CI_Model {
 
     public $tableName = 'users';
 
+    public function login($username, $password)
+    {
+        return $this->db->get_where($this->tableName,[
+            'username' => $username,
+            'password' => $password,
+        ]);
+    }
+
+    public function first($clause)
+    {
+        $query = $this->db->get_where($this->tableName,$clause);
+        return $query->result()[0];
+    }
+
     public function get()
     {
         $query = $this->db->get($this->tableName);

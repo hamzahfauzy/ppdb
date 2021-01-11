@@ -38,6 +38,7 @@
         <li><a href="<?=base_url('admin/home')?>"><i class="fa fa-link"></i> <span>Kelulusan</span></a></li>
         <li><a href="<?=base_url('admin/home')?>"><i class="fa fa-link"></i> <span>Daftar Ulang</span></a></li>
         <li><a href="<?=base_url('admin/home')?>"><i class="fa fa-link"></i> <span>Laporan</span></a></li>
+        <li><a href="<?=base_url('admin/pengguna')?>"><i class="fa fa-link"></i> <span>Pengguna</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
