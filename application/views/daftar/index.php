@@ -232,7 +232,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </center>
             </fieldset>
             <fieldset>
-                <center>
+              <center>
                 <h2 class="fs-title">Data Orang Tua / Wali</h2>
                 <h3 class="fs-subtitle">Keterangan Tentang Ayah Kandung</h3>
               </center>
@@ -295,6 +295,138 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="form-group">
                     <label>Email</label>
                     <input type="email" name="data_orang_tua[ayah][email]" placeholder="Email" class="form-control"/>
+                  </div>
+                </div>
+              </div>
+
+              <center>
+                <h3 class="fs-subtitle">Keterangan Tentang Ibu Kandung</h3>
+              </center>
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Nama Lengkap dan gelar</label>
+                    <input type="text" name="data_orang_tua[ibu][name]" placeholder="Nama Lengkap dan gelar" required="" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Agama</label>
+                    <input type="text" name="data_orang_tua[ibu][religion]" placeholder="Agama" required="" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Pendidikan Terakhir</label>
+                    <input type="text" name="data_orang_tua[ibu][last_study]" placeholder="Pendidikan Terakhir" required="" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Pekerjaan</label>
+                    <input type="text" name="data_orang_tua[ibu][work]" placeholder="Pekerjaan"class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Nama Instansi</label>
+                    <input type="text" name="data_orang_tua[ibu][work_instance]" placeholder="Nama Instansi" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Alamat dan Telephone</label>
+                    <textarea name="data_orang_tua[ibu][work_address]" placeholder="Alamat dan Telephone" class="form-control"></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Jabatan</label>
+                    <input type="text" name="data_orang_tua[ibu][position]" placeholder="Jabatan" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Penghasilan perbulan</label>
+                    <input type="number" name="data_orang_tua[ibu][income]" placeholder="Penghasilan perbulan" required="" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Telepon Rumah / HP</label>
+                    <input type="tel" name="data_orang_tua[ibu][phone]" placeholder="Telepon Rumah / HP" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="data_orang_tua[ibu][email]" placeholder="Email" class="form-control"/>
+                  </div>
+                </div>
+              </div>
+
+              <center>
+                <h3 class="fs-subtitle">Keterangan Tentang Wali</h3>
+              </center>
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Nama Lengkap dan gelar</label>
+                    <input type="text" name="data_orang_tua[wali][name]" placeholder="Nama Lengkap dan gelar" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Agama</label>
+                    <input type="text" name="data_orang_tua[wali][religion]" placeholder="Agama" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Pendidikan Terakhir</label>
+                    <input type="text" name="data_orang_tua[wali][last_study]" placeholder="Pendidikan Terakhir" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Pekerjaan</label>
+                    <input type="text" name="data_orang_tua[wali][work]" placeholder="Pekerjaan"class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Nama Instansi</label>
+                    <input type="text" name="data_orang_tua[wali][work_instance]" placeholder="Nama Instansi" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Alamat dan Telephone</label>
+                    <textarea name="data_orang_tua[wali][work_address]" placeholder="Alamat dan Telephone" class="form-control"></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Jabatan</label>
+                    <input type="text" name="data_orang_tua[wali][position]" placeholder="Jabatan" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Penghasilan perbulan</label>
+                    <input type="number" name="data_orang_tua[wali][income]" placeholder="Penghasilan perbulan" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Telepon Rumah / HP</label>
+                    <input type="tel" name="data_orang_tua[wali][phone]" placeholder="Telepon Rumah / HP" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="data_orang_tua[wali][email]" placeholder="Email" class="form-control"/>
                   </div>
                 </div>
               </div>
