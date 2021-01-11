@@ -158,6 +158,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <div class="col-sm-12 siblings-field"></div>
               </div>
+              
               <center>
                 <h2 class="fs-title">Asal Sekolah</h2>
               </center>
@@ -180,21 +181,127 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <textarea name="asal_sekolah[address]" placeholder="Alamat Sekolah" required="" class="form-control"></textarea>
                   </div>
                 </div>
-                
               </div>
+
+              <center>
+                <h2 class="fs-title">Prestasi</h2>
+                <h3 class="fs-subtitle">Data Prestasi Akademik</h3>
+              </center>
+              <div class="row">
+                <div class="col-sm-12">
+                  <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Prestasi</button>
+                  <p></p>
+                </div>
+                <div class="col-sm-12 prestasi-akademik">
+                  <table class="table table-bordered">
+                    <tr>
+                      <td>No</td>
+                      <td>Nama Kejuaran/Prestasi</td>
+                      <td>Juara</td>
+                      <td>Tingkat</td>
+                      <td>Penyelenggara</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <center>
+                <h3 class="fs-subtitle">Data Prestasi Non-Akademik</h3>
+              </center>
+              <div class="row">
+                <div class="col-sm-12">
+                  <button class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Prestasi</button>
+                  <p></p>
+                </div>
+                <div class="col-sm-12 prestasi-non-akademik">
+                  <table class="table table-bordered">
+                    <tr>
+                      <td>No</td>
+                      <td>Nama Kejuaran/Prestasi</td>
+                      <td>Juara</td>
+                      <td>Tingkat</td>
+                      <td>Penyelenggara</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
               <center>
                 <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
                 <input type="button" name="next" class="next action-button" value="Selanjutnya"/>
               </center>
             </fieldset>
             <fieldset>
-                <h2 class="fs-title">Social Profiles</h2>
-                <h3 class="fs-subtitle">Your presence on the social network</h3>
-                <input type="text" name="twitter" placeholder="Twitter"/>
-                <input type="text" name="facebook" placeholder="Facebook"/>
-                <input type="text" name="gplus" placeholder="Google Plus"/>
+                <center>
+                <h2 class="fs-title">Data Orang Tua / Wali</h2>
+                <h3 class="fs-subtitle">Keterangan Tentang Ayah Kandung</h3>
+              </center>
+              <div class="row">
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Nama Lengkap dan gelar</label>
+                    <input type="text" name="data_orang_tua[ayah][name]" placeholder="Nama Lengkap dan gelar" required="" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Agama</label>
+                    <input type="text" name="data_orang_tua[ayah][religion]" placeholder="Agama" required="" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Pendidikan Terakhir</label>
+                    <input type="text" name="data_orang_tua[ayah][last_study]" placeholder="Pendidikan Terakhir" required="" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Pekerjaan</label>
+                    <input type="text" name="data_orang_tua[ayah][work]" placeholder="Pekerjaan"class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Nama Instansi</label>
+                    <input type="text" name="data_orang_tua[ayah][work_instance]" placeholder="Nama Instansi" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Alamat dan Telephone</label>
+                    <textarea name="data_orang_tua[ayah][work_address]" placeholder="Alamat dan Telephone" class="form-control"></textarea>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Jabatan</label>
+                    <input type="text" name="data_orang_tua[ayah][position]" placeholder="Jabatan" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Penghasilan perbulan</label>
+                    <input type="number" name="data_orang_tua[ayah][income]" placeholder="Penghasilan perbulan" required="" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Telepon Rumah / HP</label>
+                    <input type="tel" name="data_orang_tua[ayah][phone]" placeholder="Telepon Rumah / HP" class="form-control"/>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="data_orang_tua[ayah][email]" placeholder="Email" class="form-control"/>
+                  </div>
+                </div>
+              </div>
+              <center>
                 <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-                <input type="button" name="next" class="next action-button" value="Next"/>
+                <input type="button" name="next" class="next action-button" value="Selanjutnya"/>
+              </center>
             </fieldset>
             <fieldset>
                 <h2 class="fs-title">Create your account</h2>
