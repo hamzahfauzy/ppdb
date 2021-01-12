@@ -459,6 +459,7 @@
                   <td>Nama Sekolah</td>
                   <td>Kelas / Jurusan</td>
                 </tr>
+                <?php if(isset($_SESSION['daftar']['data_saudara'])): ?>
                 <?php foreach($_SESSION['daftar']['data_saudara']['name'] as $key => $value): ?>
                 <tr>
                   <td><?=$key+1?></td>
@@ -468,6 +469,7 @@
                   <td><?=$_SESSION['daftar']['data_saudara']['majors'][$key]?></td>
                 </tr>
                 <?php endforeach ?>
+                <?php endif ?>
               </table>
               <?php foreach(['ayah'=>'Ayah Kandung','ibu'=>'Ibu Kandung','wali'=>'Wali'] as $key => $value): ?>
                 <?php if($key=='wali'&&$_SESSION['daftar']['data_orang_tua'][$key]['name']=='') continue; ?>
@@ -553,6 +555,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                  <?php if(isset($_SESSION['daftar']['prestasi'])): ?>
                   <?php foreach($_SESSION['daftar']['prestasi']['akademik']['name'] as $key => $value): ?>
                   <tr>
                     <td><?=$key+1?></td>
@@ -562,6 +565,7 @@
                     <td><?=$_SESSION['daftar']['prestasi']['akademik']['organizer'][$key]?></td>
                   </tr>
                   <?php endforeach ?>
+                  <?php endif ?>
                 </tbody>
               </table>
               <h2 class="fs-title">Prestasi Non-Akademik</h2>
