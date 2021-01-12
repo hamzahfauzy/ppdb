@@ -82,6 +82,7 @@ class Daftar extends CI_Controller {
 			}
 
 			$saudara = [];
+			if(isset($daftar['data_saudara'])):
 			foreach($daftar['data_saudara']['name'] as $key => $value)
 			{
 				$saudara[] = [
@@ -93,8 +94,10 @@ class Daftar extends CI_Controller {
 				];
 			}
 			$this->db->insert_batch("student_siblings",$saudara);
+			endif;
 
 			$prestasi_akademis = [];
+			if(isset($daftar['prestasi']['akademik'])):
 			foreach($daftar['prestasi']['akademik']['name'] as $key => $value)
 			{
 				$prestasi_akademis[] = [
@@ -106,8 +109,12 @@ class Daftar extends CI_Controller {
 					'type' => 'Akademis'
 				];
 			}
+			$this->db->insert_batch("student_achievements",$prestasi_akademis);
+			endif;
+
 
 			$prestasi_non_akademis = [];
+			if(isset($daftar['prestasi']['non-akademik'])):
 			foreach($daftar['prestasi']['non-akademik']['name'] as $key => $value)
 			{
 				$prestasi_non_akademis[] = [
@@ -119,12 +126,13 @@ class Daftar extends CI_Controller {
 					'type' => 'Non-Akademis'
 				];
 			}
+			$this->db->insert_batch("student_achievements",$prestasi_non_akademis);
+			endif;
 
 			$daftar['kesehatan']['student_id'] = $student->id;
 			$this->StudentHealth->insert($daftar['kesehatan']);
 
-			$this->db->insert_batch("student_achievements",$prestasi_akademis);
-			$this->db->insert_batch("student_achievements",$prestasi_non_akademis);
+			
 
 			foreach($_FILES as $key => $value)
 			{
