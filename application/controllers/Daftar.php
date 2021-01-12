@@ -67,7 +67,7 @@ class Daftar extends CI_Controller {
 			$daftar['data_pribadi']['status'] = 'Daftar';
 			$daftar['data_pribadi']['registered_at'] = date('Y-m-d H:i:s');
 			$student = $this->Student->insert($daftar['data_pribadi']);
-			if($daftar['asal_sekolah'])
+			if(isset($daftar['asal_sekolah']))
 			{
 				$daftar['asal_sekolah']['student_id'] = $student->id;
 				$this->StudentSchool->insert($daftar['asal_sekolah']);
