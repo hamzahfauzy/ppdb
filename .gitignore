@@ -8,6 +8,9 @@ application/logs/*
 
 !application/*/.htaccess
 
+/public/uploads
+/public/qrcode
+
 composer.lock
 
 user_guide_src/build/*
