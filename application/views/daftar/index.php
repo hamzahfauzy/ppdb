@@ -555,7 +555,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <?php if(isset($_SESSION['daftar']['prestasi'])): ?>
+                  <?php if(isset($_SESSION['daftar']['prestasi']['akademik'])): ?>
                   <?php foreach($_SESSION['daftar']['prestasi']['akademik']['name'] as $key => $value): ?>
                   <tr>
                     <td><?=$key+1?></td>
@@ -580,6 +580,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                  <?php if(isset($_SESSION['daftar']['prestasi']['non-akademik'])): ?>
                   <?php foreach($_SESSION['daftar']['prestasi']['non-akademik']['name'] as $key => $value): ?>
                   <tr>
                     <td><?=$key+1?></td>
@@ -589,6 +590,7 @@
                     <td><?=$_SESSION['daftar']['prestasi']['non-akademik']['organizer'][$key]?></td>
                   </tr>
                   <?php endforeach ?>
+                  <?php endif ?>
                 </tbody>
               </table>
               <h2 class="fs-title">Riwayat Kesehatan</h2>
