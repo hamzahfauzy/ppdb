@@ -33,12 +33,20 @@
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li><a href="<?=base_url('admin/home')?>"><i class="fa fa-link"></i> <span>Home</span></a></li>
-        <li><a href="<?=base_url('admin/home')?>"><i class="fa fa-link"></i> <span>Calon Siswa</span></a></li>
-        <li><a href="<?=base_url('admin/home')?>"><i class="fa fa-link"></i> <span>Verifikasi Siswa</span></a></li>
-        <li><a href="<?=base_url('admin/home')?>"><i class="fa fa-link"></i> <span>Kelulusan</span></a></li>
-        <li><a href="<?=base_url('admin/home')?>"><i class="fa fa-link"></i> <span>Daftar Ulang</span></a></li>
+        <?php if(in_array($this->session->userdata('level'),['admin','verifikator'])): ?>
+        <li><a href="<?=base_url('admin/siswa')?>"><i class="fa fa-link"></i> <span>Calon Siswa</span></a></li>
+        <li><a href="<?=base_url('admin/siswa/index/actioned')?>"><i class="fa fa-link"></i> <span>Verifikasi Siswa</span></a></li>
+        <li><a href="<?=base_url('admin/siswa/index/verified')?>"><i class="fa fa-link"></i> <span>Kelulusan</span></a></li>
+        <?php endif ?>
+        <?php if(in_array($this->session->userdata('level'),['admin','panitia'])): ?>
+        <li><a href="<?=base_url('admin/siswa/index/reregistered')?>"><i class="fa fa-link"></i> <span>Daftar Ulang</span></a></li>
+        <?php endif ?>
+        <?php /*
         <li><a href="<?=base_url('admin/home')?>"><i class="fa fa-link"></i> <span>Laporan</span></a></li>
+        */ ?>
+        <?php if(in_array($this->session->userdata('level'),['admin'])): ?>
         <li><a href="<?=base_url('admin/pengguna')?>"><i class="fa fa-link"></i> <span>Pengguna</span></a></li>
+        <?php endif ?>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

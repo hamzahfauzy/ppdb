@@ -1,6 +1,11 @@
 /*custom font*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
+.row.equal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 /*basic reset*/
 * {
     margin: 0;
@@ -39,7 +44,11 @@ body {
 }
 
 /*Hide all except first fieldset*/
-#msform fieldset:not(:first-of-type) {
+/*#msform fieldset:not(:first-of-type) {
+    display: none;
+}*/
+
+#msform fieldset:not(.active) {
     display: none;
 }
 
@@ -70,14 +79,14 @@ body {
 
 /*buttons*/
 #msform .action-button {
-    width: 100px;
+    width: auto;
     background: #007bff;
     font-weight: bold;
     color: white;
     border: 0 none;
     border-radius: 25px;
     cursor: pointer;
-    padding: 10px 5px;
+    padding: 10px 15px;
     margin: 10px 5px;
 }
 
@@ -87,18 +96,19 @@ body {
 
 #msform .action-button-previous {
     width: 100px;
-    background: #C5C5F1;
+    background: #f15d30;
     font-weight: bold;
     color: white;
     border: 0 none;
     border-radius: 25px;
     cursor: pointer;
-    padding: 10px 5px;
+    padding: 10px 15px;
     margin: 10px 5px;
 }
 
 #msform .action-button-previous:hover, #msform .action-button-previous:focus {
     box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+    text-decoration: none;
 }
 
 /*headings*/
@@ -131,7 +141,7 @@ body {
     color: white;
     text-transform: uppercase;
     font-size: 9px;
-    width: 25%;
+    width: 20%;
     float: left;
     position: relative;
     letter-spacing: 1px;

@@ -8,6 +8,7 @@ class Pengguna extends CI_Controller {
 		parent::__construct();
 		$this->load->model('User');
 		$this->authenticated->check();
+		$this->authenticated->admin_rule();
 	}
 
 	public function index()
@@ -27,6 +28,7 @@ class Pengguna extends CI_Controller {
 		if(isset($request['action']) && $request['action']=='create')
 		{
 			unset($request['action']);
+			$request['password'] = md5($request['password']);
 			if($this->User->insert($request))
 			{
 				$this->session->set_flashdata('create_user_success', "Berhasil membuat pengguna.");

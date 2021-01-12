@@ -64,7 +64,7 @@ $site = site();
 	</div>
 	<div class="row">
 		<div class="col-12 col-md-4">
-			<div class="card jenjang-card bg-info">
+			<div class="card jenjang-card bg-info" onclick="formTK.submit()" style="cursor: pointer;">
 				<img class="card-img" src="<?=base_url('public/images/ic-_kelas.svg')?>">
 				<div class="card-body text-center">
 					<h4 class="card-title">TK</h4>
@@ -77,10 +77,11 @@ $site = site();
 						</p>
 					</div>
 				</div>
+				<form style="display: none" method="post" action="<?=base_url('daftar/index/2')?>" id="formTK"><input type="hidden" name="data_jenjang" value="TK"></form>
 			</div>
 		</div>
 		<div class="col-12 col-md-4">
-			<div class="card jenjang-card bg-warning">
+			<div class="card jenjang-card bg-warning" onclick="formPAUD.submit()" style="cursor: pointer;">
 				<img class="card-img" src="<?=base_url('public/images/ic-_mahasiswa.svg')?>">
 				<div class="card-body text-center">
 					<h4 class="card-title">PAUD</h4>
@@ -93,10 +94,11 @@ $site = site();
 						</p>
 					</div>
 				</div>
+				<form style="display: none" method="post" action="<?=base_url('daftar/index/2')?>" id="formPAUD"><input type="hidden" name="data_jenjang" value="PAUD"></form>
 			</div>
 		</div>
 		<div class="col-12 col-md-4">
-			<div class="card jenjang-card bg-success">
+			<div class="card jenjang-card bg-success" onclick="formMI.submit()" style="cursor: pointer;">
 				<img class="card-img" src="<?=base_url('public/images/ic-_program studi.svg')?>">
 				<div class="card-body text-center">
 					<h4 class="card-title">MI</h4>
@@ -109,6 +111,7 @@ $site = site();
 						</p>
 					</div>
 				</div>
+				<form style="display: none" method="post" action="<?=base_url('daftar/index/2')?>" id="formMI"><input type="hidden" name="data_jenjang" value="MI"></form>
 			</div>
 		</div>
 	</div>

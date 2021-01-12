@@ -2,7 +2,7 @@
 
 class StudentHealth extends CI_Model {
 
-    public $tableName = 'student_healths';
+    public $tableName = 'student_health';
 
     public function get()
     {
