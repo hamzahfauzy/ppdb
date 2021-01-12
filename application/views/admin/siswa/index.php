@@ -2,10 +2,10 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1><?=$title?></h1>
+      <h1><?=isset($judul)?$judul:'Data Calon Siswa'?></h1>
       <ol class="breadcrumb">
         <li><a href="<?=base_url('admin')?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?=$title?></li>
+        <li class="active"><?=isset($judul)?$judul:'Data Calon Siswa'?></li>
       </ol>
     </section>
 
