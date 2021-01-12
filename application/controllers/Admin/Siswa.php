@@ -13,6 +13,7 @@ class Siswa extends CI_Controller {
 
 	public function index($status = "Daftar")
 	{
+		$title = "Data Calon Siswa";
 		if($status == "verified")
 		{
 			if(!in_array($this->session->userdata('level'),['admin','verifikator'])){
@@ -20,6 +21,7 @@ class Siswa extends CI_Controller {
 				return;
 			}
 			$students = $this->Student->get(['status !='=>'Daftar','status !='=>'Ditolak']);
+			$title = "Data Calon Siswa Lulus";
 		}
 		elseif($status == "actioned")
 		{
@@ -28,6 +30,7 @@ class Siswa extends CI_Controller {
 				return;
 			}
 			$students = $this->Student->get(['status !='=>'Daftar']);
+			$title = "Data Calon Siswa";
 		}
 		elseif($status == "reregistered")
 		{
@@ -36,6 +39,7 @@ class Siswa extends CI_Controller {
 				return;
 			}
 			$students = $this->Student->get(['status'=>'Daftar Ulang']);
+			$title = "Data Calon Siswa Daftar Ulang";
 		}
 		else
 		{
@@ -48,7 +52,8 @@ class Siswa extends CI_Controller {
 		$this->load->view('layouts/top');
 		$this->load->view('layouts/left');
 		$this->load->view('admin/siswa/index',[
-			'students' => $students
+			'students' => $students,
+			'title' => $title
 		]);
 		$this->load->view('layouts/bottom');
 	}
