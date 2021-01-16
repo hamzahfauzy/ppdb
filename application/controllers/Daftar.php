@@ -239,6 +239,7 @@ class Daftar extends CI_Controller {
 
 	function checkpendaftaran()
 	{
+		if(empty($_POST)) redirect(base_url('check'));
 		$siswa = $this->Student->find(['register_number'=>$_POST['kode']]);
 		if(empty($siswa))
 			return $this->load->view('daftar/not-found');
