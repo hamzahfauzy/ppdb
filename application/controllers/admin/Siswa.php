@@ -3,12 +3,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  
 class Siswa extends CI_Controller { 
 
+	public $labels = [
+		'data_pribadi' => [
+			'NIK' => 'NIK',
+			'name' => 'Nama Lengkap',
+			'nickname' => 'Nama Panggilan',
+			'gender' => 'Jenis Kelamin',
+			'birthplace' => 'Tempat Lahir',
+			'birthdate' => 'Tanggal Lahir',
+			'religion' => 'Agama',
+			'address' => 'Alamat',
+			'language' => 'Bahasa Sehari-hari',
+			'phone' => 'No HP',
+			'email' => 'Email',
+			'life_with' => 'Tinggal Dengan',
+			'birth_order' => 'Anak Ke',
+			'num_of_siblings' => 'Jumlah Saudara Kandung',
+		],
+		'kesehatan' => [
+			'weight' => 'Berat Badan',
+			'hight' => 'Tinggi Badan',
+			'blood_type' => 'Golongan Darah',
+			'imudity' => 'Imunisasi',
+			'tht_problem_description' => 'Masalah THT',
+			'alergi_description' => 'Alergi',
+			'opname_description' => 'Perawatan Rumah Sakit',
+			'went_to_doctor_description' => 'Pergi ke Dokter',
+		]
+	];
+
 	function __construct()
 	{
 		parent::__construct();
 		$this->authenticated->check();
 		$this->load->model('Student');
 		$this->load->library('phpqrcode/qrlib');
+		$this->load->library('Mailer');
 	}
 
 	public function index($status = "Daftar")
@@ -20,7 +50,7 @@ class Siswa extends CI_Controller {
 				redirect('admin');
 				return;
 			}
-			$students = $this->Student->get(['status !='=>'Daftar','status !='=>'Ditolak']);
+			$students = $this->Student->get(['status != "Daftar" AND status !='=>'Tolak']);
 			$judul = "Data Calon Siswa Lulus";
 		}
 		elseif($status == "actioned")
@@ -68,6 +98,9 @@ class Siswa extends CI_Controller {
 			'status'=>'Terverifikasi',
 			'verification_by' => $this->session->userdata('id')
 		],['id'=>$id]);
+		$student = $this->Student->find(['id'=>$id]);
+		$ringkasan = $this->load->view('mail/aksi',['siswa'=>$student,'labels'=>$this->labels,'aksi'=>'Terverifikasi'],TRUE);
+		$this->mailer->send($student->name,$student->email,"PPDB Baitun Naim - Pendaftaran Terverifikasi",$ringkasan);
 		$this->session->set_flashdata('success', "Berhasil verifikasi calon siswa.");
 		redirect('admin/siswa');
 		return;
@@ -83,6 +116,9 @@ class Siswa extends CI_Controller {
 			'status'=>'Ditolak',
 			'verification_by' => $this->session->userdata('id')
 		],['id'=>$id]);
+		$student = $this->Student->find(['id'=>$id]);
+		$ringkasan = $this->load->view('mail/aksi',['siswa'=>$student,'labels'=>$this->labels,'aksi'=>'Ditolak'],TRUE);
+		$this->mailer->send($student->name,$student->email,"PPDB Baitun Naim - Pendaftaran Ditolak",$ringkasan);
 		$this->session->set_flashdata('success', "Berhasil tolak calon siswa.");
 		redirect('admin/siswa');
 		return;
@@ -98,6 +134,9 @@ class Siswa extends CI_Controller {
 			'status'=>'Daftar Ulang',
 			're_registered_by' => $this->session->userdata('id')
 		],['id'=>$id]);
+		$student = $this->Student->find(['id'=>$id]);
+		$ringkasan = $this->load->view('mail/aksi',['siswa'=>$student,'labels'=>$this->labels,'aksi'=>'Daftar Ulang'],TRUE);
+		$this->mailer->send($student->name,$student->email,"PPDB Baitun Naim - Pendaftaran Ulang",$ringkasan);
 		$this->session->set_flashdata('success', "Berhasil daftar ulang calon siswa.");
 		redirect('admin/siswa');
 		return;
@@ -113,11 +152,12 @@ class Siswa extends CI_Controller {
 		$kesehatan = $this->Student->health(['student_id'=>$id]);
 		$labels = [
 			'data_pribadi' => [
+				'NIK' => 'NIK',
 				'name' => 'Nama Lengkap',
 				'nickname' => 'Nama Panggilan',
 				'gender' => 'Jenis Kelamin',
-				'birthplace' => 'Tanggal Lahir',
-				'birthdate' => 'Tempat Lahir',
+				'birthplace' => 'Tempat Lahir',
+				'birthdate' => 'Tanggal Lahir',
 				'religion' => 'Agama',
 				'address' => 'Alamat',
 				'language' => 'Bahasa Sehari-hari',
@@ -141,6 +181,7 @@ class Siswa extends CI_Controller {
 
 		$verifikator = $this->Student->user(['id'=>$siswa->verification_by]);
 		$reregistered = $this->Student->user(['id'=>$siswa->re_registered_by]);
+		$files = $this->Student->files(['student_id'=>$siswa->id]);
 
 		$path = 'public/qrcode/'.$siswa->register_number.'.png';
 		$type = pathinfo($path, PATHINFO_EXTENSION);
@@ -152,6 +193,7 @@ class Siswa extends CI_Controller {
 			'qrcode' => $base64,
 			'siswa' => $siswa,
 			'saudara' => $saudara,
+			'files' => $files,
 			'orangtua' => $orangtua,
 			'prestasi_akademis' => $prestasi_akademis,
 			'prestasi_non_akademis' => $prestasi_non_akademis,

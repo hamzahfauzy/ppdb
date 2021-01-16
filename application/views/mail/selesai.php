@@ -9,21 +9,12 @@
 <body>
 <div class="container-fluid">
   <center>
-    <h2 class="fs-title">Status Pendaftaran</h2>
-    <?php if(in_array($siswa->status,['Terverifikasi','Ditolak','Daftar Ulang'])): ?>
-    <label class="badge"><?=$siswa->status?> oleh <?=$verifikator->name?></label>
-    <?php endif ?>
-    <?php if(in_array($siswa->status,['Daftar Ulang'])): ?>
-    <label class="label label-success">Daftar Ulang oleh <?=$reregistered->name?></label>
-    <?php endif ?>
-    <?php if(in_array($siswa->status,['Daftar'])): ?>
-    <label class="label label-primary">Daftar</label>
-    <?php endif ?>
+    <h2 class="fs-title">Ringkasan Pendaftaran</h2>
   </center>
   No Pendaftaran : <b><?=$siswa->register_number?></b>
   <br>
   <h2 class="fs-title">Data Pribadi</h2>
-   <table class="table" border="1" cellpadding="5" cellspacing="0" width="100%">
+  <table border="1" cellpadding="5" cellspacing="0" width="100%">
     <?php 
     foreach($siswa as $key => $value): 
       if(!isset($labels['data_pribadi'][$key])) continue;
@@ -36,7 +27,7 @@
     <?php endforeach ?>
   </table>
   <h2 class="fs-title">Data Saudara Kandung</h2>
-  <table class="table" border="1" cellpadding="5" cellspacing="0" width="100%">
+  <table border="1" cellpadding="5" cellspacing="0" width="100%">
     <tr>
       <td>No</td>
       <td>Nama Saudara</td>
@@ -61,7 +52,7 @@
   </table>
   <?php foreach($orangtua as $key => $value): ?>
   <h2 class="fs-title">Keterangan Tentang <?=$value->parent_type?></h2>
-  <table class="table" border="1" cellpadding="5" cellspacing="0" width="100%">
+  <table border="1" cellpadding="5" cellspacing="0" width="100%">
     <tr>
       <td><b>Nama Lengkap dan gelar</b></td>
       <td><?=$value->name?></td>
@@ -100,7 +91,7 @@
   </table>
   <?php endforeach ?>
   <h2 class="fs-title">Prestasi Akademik</h2>
-  <table class="table" border="1" cellpadding="5" cellspacing="0" width="100%">
+  <table border="1" cellpadding="5" cellspacing="0" width="100%">
     <thead>
     <tr>
       <td>No</td>
@@ -123,7 +114,7 @@
     </tbody>
   </table>
   <h2 class="fs-title">Prestasi Non-Akademik</h2>
-  <table class="table" border="1" cellpadding="5" cellspacing="0" width="100%">
+  <table border="1" cellpadding="5" cellspacing="0" width="100%">
     <thead>
     <tr>
       <td>No</td>
@@ -146,7 +137,7 @@
     </tbody>
   </table>
   <h2 class="fs-title">Riwayat Kesehatan</h2>
-  <table class="table" border="1" cellpadding="5" cellspacing="0" width="100%">
+  <table border="1" cellpadding="5" cellspacing="0" width="100%">
     <?php 
     foreach($kesehatan as $key => $value): 
       if(!isset($labels['kesehatan'][$key])) continue;

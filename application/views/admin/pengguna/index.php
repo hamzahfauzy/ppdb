@@ -24,6 +24,7 @@
           <?php
             }
           ?>
+          <div class="table-responsive">
           <table class="table table-bordered datatable table-striped">
             <thead>
             <tr>
@@ -51,6 +52,7 @@
               <?php endforeach ?>
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </section>

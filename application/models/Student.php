@@ -18,9 +18,17 @@ class Student extends CI_Model {
         return $query->row();
     }
 
-    public function num_row()
+    public function num_row($jenjang)
     {
+        $this->db->like('register_number',$jenjang,'both');
         return $this->db->get($this->tableName)->num_rows();
+    }
+
+    public function check($NIK,$email)
+    {
+        $this->db->where('NIK',$NIK);
+        $this->db->or_where('email',$email);
+        return $this->db->get($this->tableName)->row();
     }
 
     public function insert($data)
@@ -49,6 +57,12 @@ class Student extends CI_Model {
     public function parents($clause)
     {
         $query = $this->db->get_where('student_parents',$clause);
+        return $query->result();
+    }
+
+    public function files($clause)
+    {
+        $query = $this->db->get_where('student_files',$clause);
         return $query->result();
     }
 

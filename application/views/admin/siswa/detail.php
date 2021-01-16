@@ -30,14 +30,15 @@
               <img src="<?=$qrcode?>" width="150px">
             </div>
             <h2 class="fs-title">Ringkasan Pendaftaran</h2>
-            <?php if(in_array($siswa->status,['Terverifikasi','Ditolak'])): ?>
+            <?php if(in_array($siswa->status,['Terverifikasi','Ditolak','Daftar Ulang'])): ?>
             <label class="badge"><?=$siswa->status?> oleh <?=$verifikator->name?></label>
             <?php endif ?>
             <?php if(in_array($siswa->status,['Daftar Ulang'])): ?>
             <label class="label label-success">Daftar Ulang oleh <?=$reregistered->name?></label>
             <?php endif ?>
           </center>
-          No Pendaftaran : <b><?=$siswa->register_number?></b>
+          No Pendaftaran : <b><?=$siswa->register_number?></b><br>
+          Waktu Pendaftaran : <?=date('d F Y, H:i:s',strtotime($siswa->registered_at)) ?>
           <br>
           <h2 class="fs-title">Data Pribadi</h2>
           <table class="table table-bordered">
@@ -48,7 +49,7 @@
             <tr>
               <td><?=$labels['data_pribadi'][$key]?></td>
               <td>:</td>
-              <td><?=$value?></td>
+              <td><?=$key=='birthdate'?date('d F Y',strtotime($value)):$value?></td>
             </tr>
             <?php endforeach ?>
           </table>
@@ -78,74 +79,43 @@
           </table>
           <?php foreach($orangtua as $key => $value): ?>
           <h2 class="fs-title">Keterangan Tentang <?=$value->parent_type?></h2>
-          <div class="row equal">
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>Nama Lengkap dan gelar</label><br>
-                <?=$value->name?>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>Agama</label><br>
-                <?=$value->religion?>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>Pendidikan Terakhir</label><br>
-                <?=$value->last_study?>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>Pekerjaan</label><br>
-                <?=$value->work?$value->work:'-'?>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>Nama Instansi</label><br>
-                <?=$value->work_instance?$value->work_instance:'-'?>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>No Telepon Instansi</label><br>
-                <?=$value->work_instance_phone?$value->work_instance_phone:'-'?>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>Alamat</label><br>
-                <?=$value->work_address?$value->work_address:'-'?>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>Jabatan</label><br>
-                <?=$value->position?$value->position:'-'?>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>Penghasilan perbulan</label><br>
-                <?=$value->income?>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>Telepon Rumah / HP</label><br>
-                <?=$value->phone?$value->phone:'-'?>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="form-group">
-                <label>Email</label><br>
-                <?=$value->email?$value->email:'-'?>
-              </div>
-            </div>
-          </div>
+          <table class="table table-bordered">
+            <tr>
+              <td><b>Nama Lengkap dan gelar</b></td>
+              <td><?=$value->name?></td>
+              <td></td>
+              <td><b>Agama</b></td>
+              <td><?=$value->religion?></td>
+            </tr>
+            <tr>
+              <td><b>Pendidikan Terakhir</b></td>
+              <td><?=$value->last_study?></td>
+              <td></td>
+              <td><b>Pekerjaan</b></td>
+              <td><?=$value->last_study?></td>
+            </tr>
+            <tr>
+              <td><b>Nama Instansi</b></td>
+              <td><?=$value->work_instance?$value->work_instance:'-'?></td>
+              <td></td>
+              <td><b>No Telepon Instansi</b></td>
+              <td><?=$value->work_instance_phone?$value->work_instance_phone:'-'?></td>
+            </tr>
+            <tr>
+              <td><b>Alamat</b></td>
+              <td><?=$value->work_address?$value->work_address:'-'?></td>
+              <td></td>
+              <td><b>Jabatan</b></td>
+              <td><?=$value->position?$value->position:'-'?></td>
+            </tr>
+            <tr>
+              <td><b>Penghasilan Perbulan</b></td>
+              <td><?=$value->income?></td>
+              <td></td>
+              <td><b>Telepon Rumah / HP</b></td>
+              <td><?=$value->phone?$value->phone:'-'?></td>
+            </tr>
+          </table>
           <?php endforeach ?>
           <h2 class="fs-title">Prestasi Akademik</h2>
           <table class="table table-bordered">
@@ -205,6 +175,25 @@
               <td><?=$value?></td>
             </tr>
             <?php endforeach ?>
+          </table>
+          <h2 class="fs-title">Berkas</h2>
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <td>No</td>
+              <td>Jenis File</td>
+              <td>Lihat</td>
+            </tr>
+            </thead>
+            <tbody>
+              <?php foreach($files as $key => $file): ?>
+              <tr>
+                <td><?=$key+1?></td>
+                <td><?=$file->file_type?></td>
+                <td><a target="_blank" href="<?=base_url($file->file_url)?>">Lihat</a></td>
+              </tr>
+              <?php endforeach ?>
+            </tbody>
           </table>
         </div>
       </div>

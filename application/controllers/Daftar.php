@@ -14,13 +14,14 @@ class Daftar extends CI_Controller {
 		$this->load->model('StudentSchool');
 		$this->load->model('StudentSibling');
 
-		$config['upload_path']          = './public/uploads/';
-        $config['allowed_types']        = 'gif|jpg|png|pdf';
-        $config['max_size']             = 1024;
-		$this->load->library('upload', $config);
 		$this->load->library('phpqrcode/qrlib');
 		$this->load->library('Pdf');
 		$this->load->library('Mailer');
+
+		$config['upload_path']   = './public/uploads/';
+	    $config['allowed_types'] = 'gif|jpg|png|pdf';
+	    $config['max_size']      = 1024;
+	    $this->load->library('upload', $config);
 	}
 
 	function index($step = 1)
@@ -43,6 +44,17 @@ class Daftar extends CI_Controller {
 		{
 			$new_data = array_merge($_SESSION['daftar'],$_POST);
 			$_SESSION['daftar'] = $new_data;
+
+			if($step == 3)
+			{
+				$daftar = $_SESSION['daftar'];
+				$check_student = $this->Student->check($daftar['data_pribadi']['NIK'],$daftar['data_pribadi']['email']);
+				if($check_student)
+				{
+					redirect(base_url('daftar/exists'));
+					return;
+				}
+			}
 		}
 		if($step > 1 && (!isset($_SESSION['daftar']['data_jenjang']) || $_SESSION['daftar']['data_jenjang'] == ""))
 		{
@@ -61,7 +73,8 @@ class Daftar extends CI_Controller {
 
 			$daftar = $_SESSION['daftar'];
 
-			$nomor_urut = $this->Student->num_row()+1 < 10 ? '0'.($this->Student->num_row()+1) : $this->Student->num_row()+1;
+			$num_row = $this->Student->num_row($daftar['data_jenjang']);
+			$nomor_urut = $num_row+1 < 10 ? '0'.($num_row+1) : $num_row+1;
 			$nomor_pendaftaran = $daftar['data_jenjang'].'.'.$nomor_urut.'.'.date('dmY');
 			$daftar['data_pribadi']['register_number'] = $nomor_pendaftaran;
 			$daftar['data_pribadi']['status'] = 'Daftar';
@@ -132,14 +145,18 @@ class Daftar extends CI_Controller {
 			$daftar['kesehatan']['student_id'] = $student->id;
 			$this->StudentHealth->insert($daftar['kesehatan']);
 
-			
-
 			foreach($_FILES as $key => $value)
 			{
+				$path = $_FILES[$key]['name'];
+				$ext = pathinfo($path, PATHINFO_EXTENSION);
+				$_FILES[$key]['name'] = $nomor_pendaftaran.'-'.$key.'.'.$ext;
+
 				$this->upload->do_upload($key);
+				$upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
+				$file_name = $upload_data['file_name'];
 				$this->StudentFile->insert([
 					'student_id' => $student->id,
-					'file_url'   => 'public/uploads/'.$value['name'],
+					'file_url'   => 'public/uploads/'.$file_name,
 					'file_type'   => $key,
 				]);
 			}
@@ -155,16 +172,17 @@ class Daftar extends CI_Controller {
 				$ringkasan = $this->ringkasan($student->id);
 				$this->mailer->send($student->name,$student->email,"PPDB Baitun Naim - Pendaftaran Baru",$ringkasan);
 				unset($_SESSION['daftar']);
-				redirect(base_url('daftar/selesai/'.$student->id));
+				redirect(base_url('daftar/thankyou/'.$student->id));
 			}
 		}
 		$labels = [
 			'data_pribadi' => [
+				'NIK' => 'NIK',
 				'name' => 'Nama Lengkap',
 				'nickname' => 'Nama Panggilan',
 				'gender' => 'Jenis Kelamin',
-				'birthplace' => 'Tanggal Lahir',
-				'birthdate' => 'Tempat Lahir',
+				'birthplace' => 'Tempat Lahir',
+				'birthdate' => 'Tanggal Lahir',
 				'religion' => 'Agama',
 				'address' => 'Alamat',
 				'language' => 'Bahasa Sehari-hari',
@@ -191,17 +209,45 @@ class Daftar extends CI_Controller {
 		]);
 	}
 
+	function thankyou($id)
+	{
+		$siswa = $this->Student->find(['id'=>$id]);
+		$this->load->view('daftar/thank-you',[
+			'id' => $id,
+			'siswa' => $siswa,
+		]);
+	}
+
 	function selesai($id)
 	{
-		$ringkasan = $this->ringkasan($id);
+		$ringkasan = $this->ringkasan($id,1);
 		$siswa = $this->Student->find(['id'=>$id]);
-		// $this->mailer->send($siswa->name,$siswa->email,"PPDB Baitun Naim - Pendaftaran Baru",$ringkasan);
 		$this->pdf->setPaper('A4', 'potrait');
 	    $this->pdf->filename = $siswa->register_number.".pdf";
 		$this->pdf->load_string($ringkasan);
 	}
 
-	function ringkasan($id)
+	function exists()
+	{
+		return $this->load->view('daftar/exists');
+	}
+
+	function check()
+	{
+		return $this->load->view('daftar/check');
+	}
+
+	function checkpendaftaran()
+	{
+		$siswa = $this->Student->find(['register_number'=>$_POST['kode']]);
+		if(empty($siswa))
+			return $this->load->view('daftar/not-found');
+		return $this->load->view('daftar/found',[
+			'konten' => $this->ringkasan($siswa->id)
+		]);
+	}
+
+	function ringkasan($id, $pdf = false)
 	{
 		$siswa = $this->Student->find(['id'=>$id]);
 		$saudara = $this->Student->siblings(['student_id'=>$id]);
@@ -211,11 +257,12 @@ class Daftar extends CI_Controller {
 		$kesehatan = $this->Student->health(['student_id'=>$id]);
 		$labels = [
 			'data_pribadi' => [
+				'NIK' => 'NIK',
 				'name' => 'Nama Lengkap',
 				'nickname' => 'Nama Panggilan',
 				'gender' => 'Jenis Kelamin',
-				'birthplace' => 'Tanggal Lahir',
-				'birthdate' => 'Tempat Lahir',
+				'birthplace' => 'Tempat Lahir',
+				'birthdate' => 'Tanggal Lahir',
 				'religion' => 'Agama',
 				'address' => 'Alamat',
 				'language' => 'Bahasa Sehari-hari',
@@ -241,7 +288,7 @@ class Daftar extends CI_Controller {
 		$path = 'public/qrcode/'.$siswa->register_number.'.png';
 		$type = pathinfo($path, PATHINFO_EXTENSION);
 		$data = file_get_contents($path);
-		$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+		$base64 = $pdf?'data:image/' . $type . ';base64,' . base64_encode($data):base_url($path);
 		return $this->load->view('daftar/selesai',[
 			'qrcode' => $base64,
 			'siswa' => $siswa,
