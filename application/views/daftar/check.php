@@ -33,7 +33,7 @@
                 <div id="home" class="tab-pane fade in active">
                   <h3>Input Kode Pendaftaran</h3>
                   <form method="post" action="<?=base_url('daftar/checkpendaftaran')?>" name="formcheck">
-                    <input type="text" name="kode" class="form-control">
+                    <input type="text" name="kode" class="form-control kode">
                     <button class="btn btn-primary">Submit</button>
                   </form>
                 </div>
@@ -115,9 +115,9 @@ function tick() {
   }
   requestAnimationFrame(tick);
 }
-function submitform(kode)
+function submitform(c)
 {
-  kode.value = kode
+  $('.kode').val(c)
   formcheck.submit()
 }
 </script>

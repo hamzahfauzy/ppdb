@@ -204,4 +204,12 @@ class Siswa extends CI_Controller {
 		]);
 		$this->load->view('layouts/bottom');
 	}
+
+	function hapus($id)
+	{
+		$this->Student->delete(['id'=>$id]);
+		$this->session->set_flashdata('success', "Berhasil menghapus data calon siswa.");
+		redirect('admin/siswa');
+		return;
+	}
 }
