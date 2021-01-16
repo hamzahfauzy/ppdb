@@ -151,12 +151,12 @@ Jenjang Pendidikan : <b><?=$_SESSION['daftar']['data_jenjang']?></b>
   <div class="alert alert-warning">
     Jika data sudah benar, silahkan upload berkas berikut untuk menyelesaikan pendaftaran
   </div>
-  <form method="post" action="<?=base_url('daftar/index/6')?>" enctype="multipart/form-data">
+  <form method="post" action="<?=base_url('daftar/index/6')?>" enctype="multipart/form-data" onsubmit="showOverlay()">
     <?php $types = $_SESSION['daftar']['data_jenjang']=='MI'?['KK','AKTA','IJAZAH TERAKHIR','PAS FOTO']:['KK','AKTA','KARTU SEHAT','PAS FOTO']; ?>
     <?php foreach($types as $file_type): ?>
       <div class="form-group">
         <label><?=$file_type?></label>
-        <input type="file" required="" name="<?=$file_type?>" class="form-control" style="height: auto;">
+        <input type="file" required="" name="<?=$file_type?>" class="form-control" style="height: auto;" accept="image/*,application/pdf">
       </div>
     <?php endforeach ?>
     <center>
@@ -164,3 +164,27 @@ Jenjang Pendidikan : <b><?=$_SESSION['daftar']['data_jenjang']?></b>
       <input type="submit" name="submit" class="submit action-button" value="Selesaikan Pendaftaran"/>
     </center>
   </form>
+<style type="text/css">
+.loading-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+    position: fixed;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.loader{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Phi_fenomeni.gif/50px-Phi_fenomeni.gif') 50% 50% no-repeat rgba(0,0,0,0.5);
+
+}
+</style>
+<div class="loading-overlay" style="display:none;">
+  <div class="loader"></div>
+</div>

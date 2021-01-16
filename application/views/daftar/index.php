@@ -26,20 +26,18 @@
                 <li class="<?=$step>4?'active':''?>">Ringkasan</li>
             </ul>
             <!-- fieldsets -->
-            <fieldset class="<?=$step==1?'active':''?>">
+            <fieldset class="active">
+              <?php if($step==1): ?>
               <?php $this->view('daftar/_jenjang') ?>
-            </fieldset>
-            <fieldset class="<?=$step==2?'active':''?>">
+              <?php elseif($step==2):?>
               <?php $this->view('daftar/_data-pribadi') ?>
-            </fieldset>
-            <fieldset class="<?=$step==3?'active':''?>">
+              <?php elseif($step==3): ?>
               <?php $this->view('daftar/_data-orang-tua') ?>
-            </fieldset>
-            <fieldset class="<?=$step==4?'active':''?>">
+              <?php elseif($step==4): ?>
               <?php $this->view('daftar/_angket-kesehatan') ?>
-            </fieldset>
-            <fieldset class="<?=$step==5?'active':''?>">
+              <?php elseif($step==5): ?>
               <?php $this->view('daftar/_ringkasan') ?>
+              <?php endif ?>
             </fieldset>
         
         <!-- /.link to designify.me code snippets -->
@@ -195,6 +193,10 @@ $('.imudity_select').change(function(e){
     $(this).next().removeAttr('required')
   }
 })
+function showOverlay()
+{
+  $('.loading-overlay').css('display','block')
+}
 </script>
 <?php if(isset($_SESSION['daftar']['data_pribadi']['num_of_siblings'])): ?>
 <script type="text/javascript">
