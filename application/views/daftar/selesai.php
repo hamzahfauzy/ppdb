@@ -11,10 +11,10 @@
   <center>
     <h2 class="fs-title">Status Pendaftaran</h2>
     <?php if(in_array($siswa->status,['Terverifikasi','Ditolak','Daftar Ulang'])): ?>
-    <label class="badge"><?=$siswa->status?> oleh <?=$verifikator->name?></label>
+    <label class="badge"><?=$siswa->status?></label>
     <?php endif ?>
     <?php if(in_array($siswa->status,['Daftar Ulang'])): ?>
-    <label class="label label-success">Daftar Ulang oleh <?=$reregistered->name?></label>
+    <label class="label label-success">Sudah Daftar Ulang</label>
     <?php endif ?>
     <?php if(in_array($siswa->status,['Daftar'])): ?>
     <label class="label label-primary">Daftar</label>
