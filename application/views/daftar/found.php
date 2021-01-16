@@ -19,6 +19,9 @@
         <div class="col-md-12">
             <!-- fieldsets -->
             <fieldset class="active">
+              <center>
+                <a href="<?=base_url('daftar/selesai/'.$siswa->id)?>" class="btn btn-success">Cetak</a>
+              </center>
               <?=$konten?>
             </fieldset>
         

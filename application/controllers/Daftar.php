@@ -244,6 +244,7 @@ class Daftar extends CI_Controller {
 		if(empty($siswa))
 			return $this->load->view('daftar/not-found');
 		return $this->load->view('daftar/found',[
+			'siswa' => $siswa,
 			'konten' => $this->ringkasan($siswa->id)
 		]);
 	}
