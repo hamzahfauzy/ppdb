@@ -27,7 +27,7 @@
           <center>
             <br>
             <div id="qrcode">
-              <img src="<?=$qrcode?>" width="150px">
+              <img class="img-thumbnail" src="<?=base_url($pas_foto->file_url)?>" width="150px" height="200px" style="object-fit: cover;object-position: center;">
             </div>
             <h2 class="fs-title">Ringkasan Pendaftaran</h2>
             <?php if(in_array($siswa->status,['Terverifikasi','Ditolak','Daftar Ulang'])): ?>

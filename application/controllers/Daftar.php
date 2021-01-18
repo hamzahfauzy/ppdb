@@ -19,8 +19,8 @@ class Daftar extends CI_Controller {
 		$this->load->library('Mailer');
 
 		$config['upload_path']   = './public/uploads/';
-	    $config['allowed_types'] = 'gif|jpg|png|pdf';
-	    $config['max_size']      = 1024;
+	    $config['allowed_types'] = 'jpeg|jpg|png';
+	    $config['max_size']      = 200;
 	    $this->load->library('upload', $config);
 	}
 
@@ -145,6 +145,8 @@ class Daftar extends CI_Controller {
 			$daftar['kesehatan']['student_id'] = $student->id;
 			$this->StudentHealth->insert($daftar['kesehatan']);
 
+			$pas_foto = "";
+
 			foreach($_FILES as $key => $value)
 			{
 				$path = $_FILES[$key]['name'];
@@ -159,6 +161,8 @@ class Daftar extends CI_Controller {
 					'file_url'   => 'public/uploads/'.$file_name,
 					'file_type'   => $key,
 				]);
+				if($key == "PAS_FOTO")
+					$pas_foto = 'public/uploads/'.$file_name;
 			}
 
 			$this->db->trans_complete();
@@ -169,8 +173,16 @@ class Daftar extends CI_Controller {
 			}
 			else
 			{
-				$ringkasan = $this->ringkasan($student->id);
-				$this->mailer->send($student->name,$student->email,"PPDB Baitun Naim - Pendaftaran Baru",$ringkasan);
+				$ringkasan = "<h2>Pendaftaran Berhasil</h2><p><b>Selamat</b>, Peserta dengan NIK ".$student->NIK." Berhasil melakukan pendaftaran</p>";
+				$pdf = $this->ringkasan($student->id,1);
+				$n = [
+					'public/generate/'.$student->register_number.".pdf",
+					$pas_foto
+				];
+				$this->pdf->setPaper('A4', 'potrait');
+			    $this->pdf->filename = $student->register_number.".pdf";
+				$this->pdf->save($pdf,'public/generate/'.$student->register_number.".pdf");
+				$this->mailer->send($student->name,$student->email,"PPDB Baitun Naim - Pendaftaran Baru",$ringkasan,$n);
 				unset($_SESSION['daftar']);
 				redirect(base_url('daftar/thankyou/'.$student->id));
 			}
@@ -243,9 +255,13 @@ class Daftar extends CI_Controller {
 		$siswa = $this->Student->find(['register_number'=>$_POST['kode']]);
 		if(empty($siswa))
 			return $this->load->view('daftar/not-found');
+		$pas_foto = $this->Student->files(['student_id'=>$siswa->id,'file_type'=>'PAS_FOTO']);
+		$path = 'public/qrcode/'.$siswa->register_number.'.png';
+		$qrcode = base_url($path);
 		return $this->load->view('daftar/found',[
 			'siswa' => $siswa,
-			'konten' => $this->ringkasan($siswa->id)
+			'pas_foto' => $pas_foto[0],
+			'qrcode' => $qrcode,
 		]);
 	}
 
@@ -286,6 +302,11 @@ class Daftar extends CI_Controller {
 			]
 		];
 
+		$kop = 'public/images/kop.jpg';
+		$type_kop = pathinfo($kop, PATHINFO_EXTENSION);
+		$data_kop = file_get_contents($kop);
+		$kop = 'data:image/' . $type_kop . ';base64,' . base64_encode($data_kop);
+
 		QRcode::png($siswa->register_number,'public/qrcode/'.$siswa->register_number.'.png');
 		$path = 'public/qrcode/'.$siswa->register_number.'.png';
 		$type = pathinfo($path, PATHINFO_EXTENSION);
@@ -300,6 +321,7 @@ class Daftar extends CI_Controller {
 			'prestasi_non_akademis' => $prestasi_non_akademis,
 			'kesehatan' => $kesehatan,
 			'labels' => $labels,
+			'kop' => $kop,
 		],TRUE);
 	}
 

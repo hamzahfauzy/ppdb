@@ -149,14 +149,14 @@ Jenjang Pendidikan : <b><?=$_SESSION['daftar']['data_jenjang']?></b>
 </table>
 </div>
   <div class="alert alert-warning">
-    Jika data sudah benar, silahkan upload berkas berikut untuk menyelesaikan pendaftaran
+    Jika data sudah benar, silahkan upload berkas berikut untuk menyelesaikan pendaftaran.
   </div>
   <form method="post" action="<?=base_url('daftar/index/6')?>" enctype="multipart/form-data" onsubmit="showOverlay()">
     <?php $types = $_SESSION['daftar']['data_jenjang']=='MI'?['KK','AKTA','IJAZAH TERAKHIR','PAS FOTO']:['KK','AKTA','KARTU SEHAT','PAS FOTO']; ?>
     <?php foreach($types as $file_type): ?>
       <div class="form-group">
-        <label><?=$file_type?></label>
-        <input type="file" required="" name="<?=$file_type?>" class="form-control" style="height: auto;" accept="image/*,application/pdf">
+        <label><?=$file_type?> (Ukuran Maksimal: 200kb dengan format jpg, jpeg dan png)</label>
+        <input type="file" required="" name="<?=$file_type?>" class="form-control" style="height: auto;" accept="image/*">
       </div>
     <?php endforeach ?>
     <center>

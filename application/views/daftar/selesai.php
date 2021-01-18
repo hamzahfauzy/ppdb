@@ -8,19 +8,12 @@
 </head>
 <body>
 <div class="container-fluid">
+  <img src="<?=$kop?>" width="100%">
   <center>
-    <h2 class="fs-title">Status Pendaftaran</h2>
-    <?php if(in_array($siswa->status,['Terverifikasi','Ditolak','Daftar Ulang'])): ?>
-    <label class="badge"><?=$siswa->status?></label>
-    <?php endif ?>
-    <?php if(in_array($siswa->status,['Daftar Ulang'])): ?>
-    <label class="label label-success">Sudah Daftar Ulang</label>
-    <?php endif ?>
-    <?php if(in_array($siswa->status,['Daftar'])): ?>
-    <label class="label label-primary">Daftar</label>
-    <?php endif ?>
+    <h2 class="fs-title">Pendaftaran</h2>
   </center>
-  No Pendaftaran : <b><?=$siswa->register_number?></b>
+  No Pendaftaran : <b><?=$siswa->register_number?></b><br>
+  Tanggal : <b><?=tanggal_indo(date('Y-m-d',strtotime($siswa->registered_at))).', '.date('H:i:s',strtotime($siswa->registered_at))?></b>
   <br>
   <h2 class="fs-title">Data Pribadi</h2>
    <table class="table" border="1" cellpadding="5" cellspacing="0" width="100%">
@@ -31,7 +24,7 @@
     <tr>
       <td><?=$labels['data_pribadi'][$key]?></td>
       <td>:</td>
-      <td><?=$key=='birthdate'?date('d F Y',strtotime($value)):$value?></td>
+      <td><?=$key=='birthdate'?tanggal_indo($value):$value?></td>
     </tr>
     <?php endforeach ?>
   </table>
@@ -158,14 +151,15 @@
     </tr>
     <?php endforeach ?>
   </table>
+  <br>
   <table width="100%">
     <tr>
-      <td width="50%">
+      <td>
         <div id="qrcode">
           <img src="<?=$qrcode?>" width="150px">
         </div>
       </td>
-      <td>
+      <td width="40%">
         Blitar, <?=date('d F Y',strtotime($siswa->registered_at));?><br>
         Orang Tua / Wali
         <br>

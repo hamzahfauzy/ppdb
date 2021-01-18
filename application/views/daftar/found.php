@@ -20,9 +20,47 @@
             <!-- fieldsets -->
             <fieldset class="active">
               <center>
-                <a href="<?=base_url('daftar/selesai/'.$siswa->id)?>" class="btn btn-success">Cetak</a>
+                <h2>Informasi Pendaftaran</h2>
+                <br>
               </center>
-              <?=$konten?>
+              <table width="100%">
+                <tr>
+                  <td width="160px" valign="top">
+                    <img src="<?=base_url($pas_foto->file_url)?>" width="150px" height="200px" style="object-fit: cover;object-position: center;">
+                  </td>
+                  <td valign="top">
+                    <table class="table table-bordered">
+                      <tr>
+                        <td width="250px">No. Pendaftaran</td>
+                        <td><b><?=$siswa->register_number?></b></td>
+                      </tr>
+                      <tr>
+                        <td>NIK</td>
+                        <td><?=$siswa->NIK?></td>
+                      </tr>
+                      <tr>
+                        <td>Tempat / Tanggal Lahir</td>
+                        <td><?=$siswa->birthplace?>, <?=tanggal_indo($siswa->birthdate)?></td>
+                      </tr>
+                      <tr>
+                        <td>Waktu Mendaftar</td>
+                        <td><?=tanggal_indo(date('Y-m-d',strtotime($siswa->registered_at))).', '.date('H:i:s',strtotime($siswa->registered_at))?></td>
+                      </tr>
+                      <tr>
+                        <td>Status</td>
+                        <td><b><?=$siswa->status?></b></td>
+                      </tr>
+                      <tr>
+                        <td>QR Code</td>
+                        <td><img src="<?=$qrcode?>" width="150px" height="200px" style="object-fit: cover;object-position: center;"></td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+              <center>
+                <a href="<?=base_url('check')?>" class="previous action-button-previous">Kembali</a>
+              </center>
             </fieldset>
         
         <!-- /.link to designify.me code snippets -->

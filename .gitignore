@@ -10,6 +10,7 @@ application/logs/*
 
 /public/uploads
 /public/qrcode
+/public/generate
 
 composer.lock
 

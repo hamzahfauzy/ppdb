@@ -20,7 +20,7 @@ class Mailer {
      * PDF filename
      * @var String
      */
-    function send($name, $mail_address, $subject, $content){
+    function send($name, $mail_address, $subject, $content, $attachment = false){
         $CI =   &get_instance();
         $users = $CI->db->get_where('users',['level'=>'admin'])->row();
         $smtp_setting = $CI->db->get_where('smtp_setting')->row();
@@ -40,6 +40,14 @@ class Mailer {
             $mail->setFrom('noreply@ppdb.baitunnaim.com', 'PPDB Baitun Naim');
             $mail->addAddress($mail_address, $name);     // Add a recipient
             $mail->addAddress($users->email);
+
+            // Attachment
+            if($attachment)
+                if(is_array($attachment))
+                    foreach($attachment as $a)
+                        $mail->addAttachment($a);
+                else
+                    $mail->addAttachment($attachment);
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML

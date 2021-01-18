@@ -56,4 +56,16 @@ class Pdf extends Dompdf{
         // Output the generated PDF to Browser
         $this->stream($this->filename, array("Attachment" => false));
     }
+
+    public function save($html, $name){
+        $this->load_html($html);
+        // Render the PDF
+        $this->render();
+
+        // save to string
+        $pdf_string = $this->output();
+        file_put_contents($name, $pdf_string);
+        // Output the generated PDF to Browser
+        // $this->stream($this->filename, array("Attachment" => false));
+    }
 }

@@ -52,7 +52,7 @@
                 </td>
                 <td>
                   <a href="<?=base_url('admin/siswa/detail')?>/<?=$student->id?>"><i class="fa fa-eye"></i></a>
-                  <a href="<?=base_url('admin/siswa/edit')?>/<?=$student->id?>"><i class="fa fa-pencil"></i></a>
+                  <!-- <a href="<?=base_url('admin/siswa/edit')?>/<?=$student->id?>"><i class="fa fa-pencil"></i></a> -->
                   <a href="<?=base_url('admin/siswa/hapus')?>/<?=$student->id?>" class="text-danger" onclick="if(confirm('Apakah anda yakin akan menghapus data ini?')){return true}else{return false}"><i class="fa fa-trash"></i></a>
                 </td>
               </tr>

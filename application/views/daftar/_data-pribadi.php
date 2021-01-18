@@ -8,7 +8,7 @@
   <div class="col-sm-12 col-md-6">
     <div class="form-group">
       <label>NIK <small>*</small></label>
-      <input type="number" name="data_pribadi[NIK]" placeholder="NIK" required="" class="form-control" value="<?=isset($_SESSION['daftar']['data_pribadi']['NIK'])?$_SESSION['daftar']['data_pribadi']['NIK']:''?>" />
+      <input type="text" pattern="[0-9]{16}" maxlength="16" name="data_pribadi[NIK]" placeholder="NIK" required="" class="form-control" value="<?=isset($_SESSION['daftar']['data_pribadi']['NIK'])?$_SESSION['daftar']['data_pribadi']['NIK']:''?>" />
     </div>
   </div>
   <div class="col-sm-12 col-md-6">
