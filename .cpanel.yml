@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/sekolahb/public_html/ppdb
+    - /bin/cp -r * $DEPLOYPATH
