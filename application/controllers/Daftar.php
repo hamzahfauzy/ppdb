@@ -17,6 +17,7 @@ class Daftar extends CI_Controller {
 		$this->load->library('phpqrcode/qrlib');
 		$this->load->library('Pdf');
 		$this->load->library('Mailer');
+		$this->load->library('Whatsapp');
 
 		$config['upload_path']   = './public/uploads/';
 	    $config['allowed_types'] = 'jpeg|jpg|png';
@@ -183,6 +184,7 @@ class Daftar extends CI_Controller {
 			    $this->pdf->filename = $student->register_number.".pdf";
 				$this->pdf->save($pdf,'public/generate/'.$student->register_number.".pdf");
 				$this->mailer->send($student->name,$student->email,"PPDB Baitun Naim - Pendaftaran Baru",$ringkasan,$n);
+				$this->whatsapp->send($student->phone,$ringkasan);
 				unset($_SESSION['daftar']);
 				redirect(base_url('daftar/thankyou/'.$student->id));
 			}

@@ -42,6 +42,16 @@
     <?php
       }
     ?>
+
+  <?php
+    if($this->session->flashdata('reset_password')) {
+      $message = $this->session->flashdata('reset_password');
+    ?>
+      <div class="alert alert-success"><?php echo $message; ?></div>
+    <?php
+      }
+    ?>
+
     <form action="<?=base_url('auth/login')?>" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Username" name="username">
@@ -61,6 +71,8 @@
     <!-- /.social-auth-links -->
     <center>
     Pendaftaran Siswa Baru <a href="<?=base_url('daftar')?>" class="text-center">Klik Disini</a>
+    <br>
+    <a href="<?=base_url('auth/reset')?>">Reset Password Admin</a>
     </center>
 
   </div>

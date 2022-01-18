@@ -7,6 +7,7 @@ class Auth extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('User');
+		$this->load->library('Mailer');
 	}
 
 	public function login()
@@ -31,6 +32,17 @@ class Auth extends CI_Controller {
 			return;
 		}
 		$this->load->view('auth/login');
+	}
+
+	public function reset()
+	{
+		$new_password = strtotime('now')+rand(1000,9999);
+		$this->User->update(['password'=>md5($new_password)],['id'=>1]);
+		$this->mailer->send('Admin PPDB Baitun Naim','rizkyfebry09@gmail.com','Reset Password Admin','Password Baru Anda adalah '.$new_password);
+		$this->mailer->send('Admin PPDB Baitun Naim','hamzahfauzy97@gmail.com','Reset Password Admin','Password Baru Anda adalah '.$new_password);
+		$this->session->set_flashdata('reset_password', "Reset Password Berhasil! Password baru sudah dikirimkan ke email admin");
+		redirect('auth/login');
+		return;
 	}
 
 	public function logout()

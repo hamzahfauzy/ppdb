@@ -39,6 +39,7 @@ class Siswa extends CI_Controller {
 		$this->load->model('Student');
 		$this->load->library('phpqrcode/qrlib');
 		$this->load->library('Mailer');
+		$this->load->library('Whatsapp');
 		$this->load->library('Pdf');
 	}
 
@@ -104,6 +105,7 @@ class Siswa extends CI_Controller {
 		$ringkasan = $this->load->view('mail/verifikasi',['siswa'=>$student,'verifikator'=>$verifikator],TRUE);
 		$this->verifikasi_file($id);
 		$this->mailer->send($student->name,$student->email,"PPDB Baitun Naim - Pendaftaran Terverifikasi",$ringkasan,'public/generate/'.$student->register_number.'.pdf');
+		$this->whatsapp->send($student->phone,strip_tags($ringkasan));
 		$this->session->set_flashdata('success', "Berhasil verifikasi calon siswa.");
 		redirect('admin/siswa');
 		return;
@@ -123,6 +125,7 @@ class Siswa extends CI_Controller {
 		$verifikator = $this->Student->user(['id'=>$this->session->userdata('id')]);
 		$ringkasan = $this->load->view('mail/tolak',['siswa'=>$student,'verifikator'=>$verifikator],TRUE);
 		$this->mailer->send($student->name,$student->email,"PPDB Baitun Naim - Pendaftaran Ditolak",$ringkasan);
+		$this->whatsapp->send($student->phone,strip_tags($ringkasan));
 		$this->session->set_flashdata('success', "Berhasil tolak calon siswa.");
 		redirect('admin/siswa');
 		return;
@@ -141,6 +144,7 @@ class Siswa extends CI_Controller {
 		$student = $this->Student->find(['id'=>$id]);
 		$ringkasan = $this->load->view('mail/daftar_ulang',['siswa'=>$student],TRUE);
 		$this->mailer->send($student->name,$student->email,"PPDB Baitun Naim - Pendaftaran Ulang",$ringkasan);
+		$this->whatsapp->send($student->phobe,strip_tags($ringkasan));
 		$this->session->set_flashdata('success', "Berhasil daftar ulang calon siswa.");
 		redirect('admin/siswa');
 		return;
